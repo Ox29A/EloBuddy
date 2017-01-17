@@ -10,11 +10,11 @@ using Color = System.Drawing.Color;
 
 namespace iTwitch
 {
-    public class Twitch
+    public static class Twitch
     {
         #region Fields
 
-        private Menu _mainMenu, _comboMenu, _harassMenu, _drawMenu, _miscMenu;
+        private static Menu _mainMenu, _comboMenu, _harassMenu, _drawMenu, _miscMenu;
 
         #endregion
 
@@ -27,7 +27,7 @@ namespace iTwitch
 
         #region Public Methods and Operators
 
-        public void LoadMenu()
+        public static void LoadMenu()
         {
             _mainMenu = MainMenu.AddMenu("iTwitch 2.0", "com.itwitch");
 
@@ -65,7 +65,7 @@ namespace iTwitch
             }
         }
 
-        public void LoadSpells()
+        public static void LoadSpells()
         {
             Q = new Spell.Active(SpellSlot.Q);
             W = new Spell.Skillshot(SpellSlot.W, 950, SkillShotType.Circular, 250, 1400, 280)
@@ -76,11 +76,7 @@ namespace iTwitch
             R = new Spell.Active(SpellSlot.R);
         }
 
-        public void OnCombo()
-        {
-        }
-
-        public void OnGameLoad(EventArgs args)
+        public static void OnGameLoad(EventArgs args)
         {
             if (ObjectManager.Player.ChampionName != "Twitch") return;
 
@@ -114,40 +110,45 @@ namespace iTwitch
             Orbwalker.OnPostAttack += OnPostAttack;
         }
 
-        private void OnPostAttack(AttackableUnit target, EventArgs args)
+        private static void OnPostAttack(AttackableUnit target, EventArgs args)
         {
             if (target == null || !target.IsEnemy || target.GetType() != typeof(AIHeroClient))
                 return;
 
-            if (_comboMenu["com.itwitch.combo.useW"].Cast<CheckBox>().CurrentValue && W.IsReady())
+            switch (Orbwalker.ActiveModesFlags)
             {
-                if (_miscMenu["com.itwitch.misc.saveManaE"].Cast<CheckBox>().CurrentValue &&
-                    ObjectManager.Player.Mana <= E.ManaCost + W.ManaCost)
-                    return;
+                case Orbwalker.ActiveModes.Combo:
+                    if (_comboMenu["com.itwitch.combo.useW"].Cast<CheckBox>().CurrentValue && W.IsReady())
+                    {
+                        if (_miscMenu["com.itwitch.misc.saveManaE"].Cast<CheckBox>().CurrentValue &&
+                            ObjectManager.Player.Mana <= E.ManaCost + W.ManaCost)
+                            return;
 
-                if (_miscMenu["com.itwitch.misc.noWTurret"].Cast<CheckBox>().CurrentValue &&
-                    ObjectManager.Player.IsUnderTurret())
-                    return;
+                        if (_miscMenu["com.itwitch.misc.noWTurret"].Cast<CheckBox>().CurrentValue &&
+                            ObjectManager.Player.IsUnderTurret())
+                            return;
 
-                var wTarget = TargetSelector.GetTarget(W.Range, DamageType.Physical);
+                        var wTarget = TargetSelector.GetTarget(W.Range, DamageType.Physical);
 
-                if (wTarget != null
-                    && wTarget.Health
-                    < ObjectManager.Player.GetAutoAttackDamage(wTarget, true)
-                    * _miscMenu["com.itwitch.misc.noWAA"].Cast<Slider>().CurrentValue)
-                    return;
+                        if (wTarget != null
+                            && wTarget.Health
+                            < ObjectManager.Player.GetAutoAttackDamage(wTarget, true)
+                            * _miscMenu["com.itwitch.misc.noWAA"].Cast<Slider>().CurrentValue)
+                            return;
 
-                if (wTarget.IsValidTarget(W.Range)
-                    && !ObjectManager.Player.HasBuff("TwitchHideInShadows"))
-                {
-                    var prediction = W.GetPrediction(wTarget);
-                    if (prediction.HitChance >= HitChance.High)
-                        W.Cast(prediction.CastPosition);
-                }
+                        if (wTarget.IsValidTarget(W.Range)
+                            && !ObjectManager.Player.HasBuff("TwitchHideInShadows"))
+                        {
+                            var prediction = W.GetPrediction(wTarget);
+                            if (prediction.HitChance >= HitChance.High)
+                                W.Cast(prediction.CastPosition);
+                        }
+                    }
+                    break;
             }
         }
 
-        public void OnHarass()
+        public static void OnHarass()
         {
             if (_harassMenu["com.itwitch.harass.useW"].Cast<CheckBox>().CurrentValue && W.IsReady())
             {
@@ -165,7 +166,7 @@ namespace iTwitch
 
         #region Methods
 
-        private void OnDraw(EventArgs args)
+        private static void OnDraw(EventArgs args)
         {
             if (_drawMenu["com.itwitch.drawing.drawRRange"].Cast<CheckBox>().CurrentValue)
             {
@@ -213,21 +214,21 @@ namespace iTwitch
                 }
         }
 
-        private void OnUpdate(EventArgs args)
+        private static void OnUpdate(EventArgs args)
         {
             if (_miscMenu["com.itwitch.misc.recall"].Cast<KeyBind>().CurrentValue)
                 ObjectManager.Player.Spellbook.CastSpell(SpellSlot.Recall);
 
             if (_comboMenu["com.itwitch.combo.useE"].Cast<CheckBox>().CurrentValue && E.IsReady())
-                if (PassiveManager.PassiveEnemies.Any(x => x.Killable && x.StackCount > 0 && x.Target is AIHeroClient))
+                if (
+                    PassiveManager.PassiveEnemies.Any(
+                        x =>
+                            x.Killable && x.StackCount > 0 && x.Target is AIHeroClient &&
+                            !((AIHeroClient) x.Target).HasUndyingBuff(true)))
                     E.Cast();
 
             switch (Orbwalker.ActiveModesFlags)
             {
-                case Orbwalker.ActiveModes.Combo:
-                    OnCombo();
-                    break;
-
                 case Orbwalker.ActiveModes.Harass:
                     OnHarass();
                     break;

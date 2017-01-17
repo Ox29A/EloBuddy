@@ -45,3 +45,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.manifest
+EloBuddyAddons/iTwitch/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+*.txt
+EloBuddyAddons/iTwitch/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache

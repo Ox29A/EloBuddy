@@ -6,8 +6,7 @@ namespace iTwitch
     {
         private static void Main(string[] args)
         {
-            var twitch = new Twitch();
-            Loading.OnLoadingComplete += twitch.OnGameLoad;
+            Loading.OnLoadingComplete += Twitch.OnGameLoad;
         }
     }
 }
