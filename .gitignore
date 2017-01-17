@@ -46,8 +46,22 @@ Network Trash Folder
 Temporary Items
 .apdisk
 *.manifest
-EloBuddyAddons/iTwitch/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 *.txt
-EloBuddyAddons/iTwitch/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 *.suo
-EloBuddyAddons/iTwitch/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/build/
+*.suo
+*.user
+_ReSharper.*/
+*.sdf
+bin/
+obj/
+Debug/
+Release/
+*.opensdf
+*.tlog
+*.log
+TestResult.xml
+*.VisualState.xml
+Version.cs
+Version.h
+Version.cpp
