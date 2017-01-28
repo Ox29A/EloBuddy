@@ -49,6 +49,7 @@ namespace iTwitch
                 _miscMenu.Add("com.itwitch.misc.recall",
                     new KeyBind("Stealth Recall Key", false, KeyBind.BindTypes.HoldActive, 'T'));
                 _miscMenu.Add("com.itwitch.misc.autoYo", new CheckBox("Youmuus with R"));
+                _miscMenu.Add("com.itwtich.misc.yomuOnR", new CheckBox("Always use Yoomus with R"));
                 _miscMenu.Add("com.itwitch.misc.noWTurret", new CheckBox("Don't W Under Tower"));
                 _miscMenu.Add("com.itwitch.misc.noWAA", new Slider("No W if x aa can kill", 2, 0, 10));
                 _miscMenu.Add("com.itwitch.misc.ebeforedeath", new CheckBox("E Before Death"));
@@ -102,13 +103,13 @@ namespace iTwitch
                 }
 
                 if (eventArgs.Slot == SpellSlot.R && _miscMenu["com.itwitch.misc.autoYo"].Cast<CheckBox>().CurrentValue)
-                    if (!EntityManager.Enemies.Any(x => ObjectManager.Player.Distance(x) <= R.Range))
-                        return;
-
-                if (eventArgs.Slot == SpellSlot.R && _miscMenu["com.itwtich.misc.yomuOnR"].Cast<CheckBox>().CurrentValue)
                 {
-                    ghostblade.Cast();
+                    if (R.IsReady() && ghostblade.IsOwned() && ghostblade.IsReady())
+                    {
+                        ghostblade.Cast();
+                    }
                 }
+                
 
                 if (_miscMenu["com.itwitch.misc.saveManaE"].Cast<CheckBox>().CurrentValue &&
                     eventArgs.Slot == SpellSlot.W)
