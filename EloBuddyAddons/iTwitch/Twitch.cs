@@ -22,6 +22,7 @@ namespace iTwitch
 
         public static Spell.Skillshot W;
         public static Spell.Active Q, E, R;
+        public static Item ghostblade;
 
         #endregion
 
@@ -76,11 +77,17 @@ namespace iTwitch
             R = new Spell.Active(SpellSlot.R);
         }
 
+        public static void LoadItems()
+        {
+            ghostblade = new Item(ItemId.Youmuus_Ghostblade);
+        }
+
         public static void OnGameLoad(EventArgs args)
         {
             if (ObjectManager.Player.ChampionName != "Twitch") return;
 
             LoadSpells();
+            LoadItems();
             LoadMenu();
 
             Spellbook.OnCastSpell += (sender, eventArgs) =>
@@ -97,6 +104,11 @@ namespace iTwitch
                 if (eventArgs.Slot == SpellSlot.R && _miscMenu["com.itwitch.misc.autoYo"].Cast<CheckBox>().CurrentValue)
                     if (!EntityManager.Enemies.Any(x => ObjectManager.Player.Distance(x) <= R.Range))
                         return;
+
+                if (eventArgs.Slot == SpellSlot.R && _miscMenu["com.itwtich.misc.yomuOnR"].Cast<CheckBox>().CurrentValue)
+                {
+                    ghostblade.Cast();
+                }
 
                 if (_miscMenu["com.itwitch.misc.saveManaE"].Cast<CheckBox>().CurrentValue &&
                     eventArgs.Slot == SpellSlot.W)
@@ -224,7 +236,7 @@ namespace iTwitch
                     PassiveManager.PassiveEnemies.Any(
                         x =>
                             x.Killable && x.StackCount > 0 && x.Target is AIHeroClient &&
-                            !((AIHeroClient) x.Target).HasUndyingBuff(true)))
+                            !((AIHeroClient)x.Target).HasUndyingBuff(true)))
                     E.Cast();
 
             switch (Orbwalker.ActiveModesFlags)
