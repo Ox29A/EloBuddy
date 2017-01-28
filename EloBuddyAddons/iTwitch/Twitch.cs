@@ -49,7 +49,6 @@ namespace iTwitch
                 _miscMenu.Add("com.itwitch.misc.recall",
                     new KeyBind("Stealth Recall Key", false, KeyBind.BindTypes.HoldActive, 'T'));
                 _miscMenu.Add("com.itwitch.misc.autoYo", new CheckBox("Youmuus with R"));
-                _miscMenu.Add("com.itwtich.misc.yomuOnR", new CheckBox("Always use Yoomus with R"));
                 _miscMenu.Add("com.itwitch.misc.noWTurret", new CheckBox("Don't W Under Tower"));
                 _miscMenu.Add("com.itwitch.misc.noWAA", new Slider("No W if x aa can kill", 2, 0, 10));
                 _miscMenu.Add("com.itwitch.misc.ebeforedeath", new CheckBox("E Before Death"));
