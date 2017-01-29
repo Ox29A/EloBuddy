@@ -10,3 +10,15 @@ C:\Users\XPredatorX1\Documents\Visual Studio 2015\Projects\EloBuddyAddons\iTwitc
 C:\Users\XPredatorX1\Documents\Visual Studio 2015\Projects\EloBuddyAddons\iTwitch\obj\Debug\iTwitch.csprojResolveAssemblyReference.cache
 C:\Users\XPredatorX1\Documents\Visual Studio 2015\Projects\EloBuddyAddons\iTwitch\obj\Debug\iTwitch.exe
 C:\Users\XPredatorX1\Documents\Visual Studio 2015\Projects\EloBuddyAddons\iTwitch\obj\Debug\iTwitch.pdb
+C:\Users\XPredatorX1\Documents\GitHub\EloBuddy\EloBuddyAddons\iTwitch\bin\Debug\iTwitch.exe.config
+C:\Users\XPredatorX1\Documents\GitHub\EloBuddy\EloBuddyAddons\iTwitch\obj\Debug\iTwitch.exe
+C:\Users\XPredatorX1\Documents\GitHub\EloBuddy\EloBuddyAddons\iTwitch\obj\Debug\iTwitch.pdb
+C:\Users\XPredatorX1\Documents\GitHub\EloBuddy\EloBuddyAddons\iTwitch\bin\Debug\iTwitch.exe
+C:\Users\XPredatorX1\Documents\GitHub\EloBuddy\EloBuddyAddons\iTwitch\bin\Debug\iTwitch.pdb
+C:\Users\XPredatorX1\Documents\GitHub\EloBuddy\EloBuddyAddons\iTwitch\bin\Debug\EloBuddy.dll
+C:\Users\XPredatorX1\Documents\GitHub\EloBuddy\EloBuddyAddons\iTwitch\bin\Debug\EloBuddy.SDK.dll
+C:\Users\XPredatorX1\Documents\GitHub\EloBuddy\EloBuddyAddons\iTwitch\bin\Debug\SharpDX.dll
+C:\Users\XPredatorX1\Documents\GitHub\EloBuddy\EloBuddyAddons\iTwitch\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\XPredatorX1\Documents\GitHub\EloBuddy\EloBuddyAddons\iTwitch\bin\Debug\EloBuddy.Sandbox.dll
+C:\Users\XPredatorX1\Documents\GitHub\EloBuddy\EloBuddyAddons\iTwitch\bin\Debug\Newtonsoft.Json.dll
+C:\Users\XPredatorX1\Documents\GitHub\EloBuddy\EloBuddyAddons\iTwitch\obj\Debug\iTwitch.csprojResolveAssemblyReference.cache
