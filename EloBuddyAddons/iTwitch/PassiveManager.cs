@@ -18,7 +18,7 @@ namespace iTwitch
 
         public static string BuffName = "TwitchDeadlyVenom";
 
-        public static string StackName = "twitch_poison_counter_0";
+        public static string StackName = "Twitch_Base_P_Stack_0";
         public static string StackEndName = ".troy";
 
         private static float BaseEDmg => new[] {20f, 35f, 50f, 65f, 80f}[Twitch.E.Level - 1];
